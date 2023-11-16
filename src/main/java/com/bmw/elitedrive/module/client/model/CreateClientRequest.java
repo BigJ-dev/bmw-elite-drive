@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 @Data
-public class GetClientRequest {
+public class CreateClientRequest {
     @NotNull
     private String name;
     @NotNull

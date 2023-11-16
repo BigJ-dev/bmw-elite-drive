@@ -2,7 +2,7 @@ package com.bmw.elitedrive.module.client.dao;
 
 import com.bmw.elitedrive.common.util.TimeMachine;
 import com.bmw.elitedrive.module.client.model.Client;
-import com.bmw.elitedrive.module.client.model.GetClientRequest;
+import com.bmw.elitedrive.module.client.model.CreateClientRequest;
 import com.bmw.elitedrive.module.client.model.GetClientResponse;
 
 public interface Mapper {
@@ -14,7 +14,7 @@ public interface Mapper {
                 .build();
     }
 
-    static Client mapToClient(GetClientRequest request) {
+    static Client mapToClient(CreateClientRequest request) {
         return  Client.builder()
                 .name(request.getName())
                 .surname(request.getSurname())

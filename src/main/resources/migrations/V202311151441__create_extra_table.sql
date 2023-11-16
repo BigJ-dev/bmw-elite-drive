@@ -1,11 +1,10 @@
-CREATE SEQUENCE IF NOT EXISTS elite_drive.hibernate_sequence START WITH 1 INCREMENT BY 1;
-
 CREATE TABLE elite_drive.extra
 (
-    extra_id          BIGINT NOT NULL,
+    extra_id          SERIAL PRIMARY KEY,
     name              VARCHAR(255),
     description       VARCHAR(255),
+    price             DECIMAL,
     additional_cost   DECIMAL,
-    compatible_models VARCHAR(255),
-    CONSTRAINT pk_extra PRIMARY KEY (extra_id)
+    unit_quantity     INTEGER NOT NULL,
+    compatible_models VARCHAR(255)
 );

@@ -5,7 +5,7 @@ import com.bmw.elitedrive.common.exception.EntityNotFoundException;
 import com.bmw.elitedrive.module.client.dao.ClientRepository;
 import com.bmw.elitedrive.module.client.dao.ClientService;
 import com.bmw.elitedrive.module.client.model.Client;
-import com.bmw.elitedrive.module.client.model.GetClientRequest;
+import com.bmw.elitedrive.module.client.model.CreateClientRequest;
 import com.bmw.elitedrive.module.client.model.GetClientResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public GetClientResponse addClient(GetClientRequest request) {
+    public GetClientResponse addClient(CreateClientRequest request) {
         clientRepo.findClientByIdNumber(request.getIdNumber())
                 .ifPresent(c -> {
                     throw new EntityExistsException("A client already exists in our records with the id number: " + request.getIdNumber());

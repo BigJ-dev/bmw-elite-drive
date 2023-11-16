@@ -1,7 +1,7 @@
 package com.bmw.elitedrive.module.client.controller;
 
 import com.bmw.elitedrive.module.client.dao.ClientService;
-import com.bmw.elitedrive.module.client.model.GetClientRequest;
+import com.bmw.elitedrive.module.client.model.CreateClientRequest;
 import com.bmw.elitedrive.module.client.model.GetClientResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @PostMapping(value = "/client")
-    public ResponseEntity<GetClientResponse> createClient(@RequestBody GetClientRequest request) {
+    public ResponseEntity<GetClientResponse> createClient(@RequestBody CreateClientRequest request) {
         return ResponseEntity.ok().body(clientService.addClient(request));
     }
 
