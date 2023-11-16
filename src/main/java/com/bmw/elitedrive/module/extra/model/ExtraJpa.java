@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "extra", schema = "elite_drive")
-public class Extra {
+public class ExtraJpa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long extraId;
@@ -24,6 +24,6 @@ public class Extra {
     private int unitQuantity;
     private String compatibleModels;
 
-    @ManyToMany(mappedBy = "extras")
+    @ManyToMany(mappedBy = "extraJpas")
     private Set<Order> orders;
 }

@@ -1,21 +1,21 @@
 package com.bmw.elitedrive.module.client.dao;
 
 import com.bmw.elitedrive.common.util.TimeMachine;
-import com.bmw.elitedrive.module.client.model.Client;
+import com.bmw.elitedrive.module.client.model.ClientJpa;
 import com.bmw.elitedrive.module.client.model.CreateClientRequest;
 import com.bmw.elitedrive.module.client.model.GetClientResponse;
 
 public interface Mapper {
-    static GetClientResponse mapToGetClientResponse(Client client) {
+    static GetClientResponse mapClientJpaToResponse(ClientJpa clientJpa) {
         return GetClientResponse.builder()
-                .clientId(client.getClientId())
-                .name(client.getName())
-                .surname(client.getSurname())
+                .clientId(clientJpa.getClientId())
+                .name(clientJpa.getName())
+                .surname(clientJpa.getSurname())
                 .build();
     }
 
-    static Client mapToClient(CreateClientRequest request) {
-        return  Client.builder()
+    static ClientJpa mapClientRequestToClientJpa(CreateClientRequest request) {
+        return  ClientJpa.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
                 .idNumber(request.getIdNumber())

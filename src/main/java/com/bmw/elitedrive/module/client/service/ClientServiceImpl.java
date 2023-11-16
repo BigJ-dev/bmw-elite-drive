@@ -4,7 +4,7 @@ import com.bmw.elitedrive.common.exception.EntityExistsException;
 import com.bmw.elitedrive.common.exception.EntityNotFoundException;
 import com.bmw.elitedrive.module.client.dao.ClientRepository;
 import com.bmw.elitedrive.module.client.dao.ClientService;
-import com.bmw.elitedrive.module.client.model.Client;
+import com.bmw.elitedrive.module.client.model.ClientJpa;
 import com.bmw.elitedrive.module.client.model.CreateClientRequest;
 import com.bmw.elitedrive.module.client.model.GetClientResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,17 +28,17 @@ public class ClientServiceImpl implements ClientService {
                     throw new EntityExistsException("A client already exists in our records with the id number: " + request.getIdNumber());
                 });
 
-        Client client = mapToClient(request);
-        return mapToGetClientResponse(clientRepo.saveAndFlush(client));
+        ClientJpa clientJpa = mapClientRequestToClientJpa(request);
+        return mapClientJpaToResponse(clientRepo.saveAndFlush(clientJpa));
     }
 
     @Override
     @Transactional
     public GetClientResponse deleteClient(Long clientId) {
-        Client client = clientRepo.findById(clientId)
+        ClientJpa clientJpa = clientRepo.findById(clientId)
                 .orElseThrow(() -> new EntityNotFoundException("Client with id not found: " + clientId));
 
-        clientRepo.delete(client);
-        return mapToGetClientResponse(client);
+        clientRepo.delete(clientJpa);
+        return mapClientJpaToResponse(clientJpa);
     }
 }

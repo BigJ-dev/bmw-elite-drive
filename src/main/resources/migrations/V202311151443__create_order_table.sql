@@ -13,7 +13,7 @@
 -- );
 --
 -- ALTER TABLE elite_drive."order"
---     ADD CONSTRAINT FK_ORDER_ON_CLIENTID FOREIGN KEY (client_id) REFERENCES elite_drive.client (client_id);
+--     ADD CONSTRAINT FK_ORDER_ON_CLIENTID FOREIGN KEY (client_id) REFERENCES elite_drive.clientJpa (client_id);
 --
 -- ALTER TABLE elite_drive."order"
 --     ADD CONSTRAINT FK_ORDER_ON_VEHICLEID FOREIGN KEY (vehicle_id) REFERENCES elite_drive.vehicleJpa (vehicle_id);

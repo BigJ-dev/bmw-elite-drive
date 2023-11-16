@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "client", schema = "elite_drive")
-public class Client {
+public class ClientJpa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
@@ -24,6 +24,6 @@ public class Client {
     private String address;
     private Instant registrationDate;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "clientJpa")
     private Set<Order> orders;
 }

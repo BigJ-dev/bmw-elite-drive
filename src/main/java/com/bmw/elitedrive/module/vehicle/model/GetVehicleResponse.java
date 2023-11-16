@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 @Builder
+@Data
 public class GetVehicleResponse {
     private Long vehicleId;
     private int year;
