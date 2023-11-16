@@ -2,6 +2,7 @@ package com.bmw.elitedrive.common.error;
 
 import com.bmw.elitedrive.common.exception.EntityExistsException;
 import com.bmw.elitedrive.common.exception.EntityNotFoundException;
+import com.bmw.elitedrive.common.exception.OrderVehicleException;
 import com.bmw.elitedrive.common.util.TimeMachine;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(EntityExistsException ex, WebRequest request) {
+        return new ResponseEntity<>(new ApiError(ex.getMessage(), HttpStatus.NOT_FOUND, TimeMachine.getNow()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OrderVehicleException.class)
+    public ResponseEntity<Object> handleOrderNotFoundException(EntityExistsException ex, WebRequest request) {
         return new ResponseEntity<>(new ApiError(ex.getMessage(), HttpStatus.NOT_FOUND, TimeMachine.getNow()), HttpStatus.NOT_FOUND);
     }
 }

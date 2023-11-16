@@ -1,11 +1,9 @@
 package com.bmw.elitedrive.module.extra.model;
 
-import com.bmw.elitedrive.module.order.model.Order;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Data
 @Builder
@@ -24,6 +22,4 @@ public class ExtraJpa {
     private int unitQuantity;
     private String compatibleModels;
 
-    @ManyToMany(mappedBy = "extraJpas")
-    private Set<Order> orders;
 }

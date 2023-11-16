@@ -1,6 +1,6 @@
 package com.bmw.elitedrive.module.client.model;
 
-import com.bmw.elitedrive.module.order.model.Order;
+import com.bmw.elitedrive.module.order.model.OrderJpa;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +24,4 @@ public class ClientJpa {
     private String address;
     private Instant registrationDate;
 
-    @OneToMany(mappedBy = "clientJpa")
-    private Set<Order> orders;
 }

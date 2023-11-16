@@ -1,4 +1,4 @@
-CREATE TABLE elite_drive.extra
+CREATE TABLE IF NOT EXISTS elite_drive.extra
 (
     extra_id          SERIAL PRIMARY KEY,
     name              VARCHAR(255),
@@ -6,5 +6,7 @@ CREATE TABLE elite_drive.extra
     price             DECIMAL,
     additional_cost   DECIMAL,
     unit_quantity     INTEGER NOT NULL,
-    compatible_models VARCHAR(255)
+    compatible_models VARCHAR(255),
+    order_id          BIGINT
 );
+

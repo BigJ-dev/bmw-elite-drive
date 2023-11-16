@@ -1,6 +1,3 @@
--- Create the schema
-CREATE SCHEMA IF NOT EXISTS elite_drive;
--- Create the table
 CREATE TABLE IF NOT EXISTS elite_drive.client
 (
     client_id         SERIAL PRIMARY KEY,
@@ -10,4 +7,4 @@ CREATE TABLE IF NOT EXISTS elite_drive.client
     contact_info      VARCHAR(255),
     address           VARCHAR(255),
     registration_date TIMESTAMP WITHOUT TIME ZONE
-);
+    );

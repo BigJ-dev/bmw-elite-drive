@@ -1,4 +1,4 @@
-CREATE TABLE elite_drive.vehicle
+CREATE TABLE IF NOT EXISTS elite_drive.vehicle
 (
     vehicle_id        SERIAL PRIMARY KEY,
     model             VARCHAR(255),

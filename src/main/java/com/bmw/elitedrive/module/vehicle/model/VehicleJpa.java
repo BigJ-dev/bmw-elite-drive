@@ -1,6 +1,6 @@
 package com.bmw.elitedrive.module.vehicle.model;
 
-import com.bmw.elitedrive.module.order.model.Order;
+import com.bmw.elitedrive.module.order.model.OrderJpa;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +22,4 @@ public class VehicleJpa {
     private BigDecimal basePrice;
     private String manufacturer;
     private String standardFeatures;
-
-    @OneToMany(mappedBy = "vehicleJpa")
-    private Set<Order> orders;
 }

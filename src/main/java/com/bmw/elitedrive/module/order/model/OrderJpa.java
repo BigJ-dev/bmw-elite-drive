@@ -3,24 +3,23 @@ package com.bmw.elitedrive.module.order.model;
 import com.bmw.elitedrive.module.client.model.ClientJpa;
 import com.bmw.elitedrive.module.extra.model.ExtraJpa;
 import com.bmw.elitedrive.module.vehicle.model.VehicleJpa;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 @Data
+@Builder
 @Entity
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "order", schema = "elite_drive")
-public class Order {
+public class OrderJpa {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     private Instant orderDate;
     private Instant estimatedDeliveryDate;
@@ -35,11 +34,6 @@ public class Order {
     @JoinColumn(name = "vehicleId")
     private VehicleJpa vehicleJpa;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_extras",
-            joinColumns = @JoinColumn(name = "orderId"),
-            inverseJoinColumns = @JoinColumn(name = "extraId")
-    )
-    private Set<ExtraJpa> extraJpas;
+    @OneToMany(mappedBy = "extraId")
+    private List<ExtraJpa> extraJpaList;
 }
