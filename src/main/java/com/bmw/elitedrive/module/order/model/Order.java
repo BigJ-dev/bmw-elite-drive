@@ -2,7 +2,7 @@ package com.bmw.elitedrive.module.order.model;
 
 import com.bmw.elitedrive.module.client.model.Client;
 import com.bmw.elitedrive.module.extra.model.Extra;
-import com.bmw.elitedrive.module.vehicle.model.Vehicle;
+import com.bmw.elitedrive.module.vehicle.model.VehicleJpa;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +33,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "vehicleId")
-    private Vehicle vehicle;
+    private VehicleJpa vehicleJpa;
 
     @ManyToMany
     @JoinTable(
