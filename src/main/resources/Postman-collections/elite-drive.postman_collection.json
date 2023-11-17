@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "0efcea37-02be-4749-88a8-ba64b10ecf06",
+		"name": "elite-drive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26306160"
+	},
+	"item": [
+		{
+			"name": "addClient",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Doe\",\n    \"idNumber\": \"ID123456\",\n    \"contactInfo\": \"john.doe@example.com\",\n    \"address\": \"1234 Elm Street\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteClient",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/client-delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"client-delete",
+						"1"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addExtra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Egle Rim\",\n    \"description\": \"This rim is expertly crafted from high-quality carbon fiber.\",\n    \"price\": 100.00,\n    \"additionalCost\": 20.00,\n    \"unitQuantity\": 5,\n    \"compatibleModels\": \"Model1, Model2, Model3\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/extra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"extra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateExtra",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Egle Rim\",\n    \"description\": \"This rim is expertly crafted from high-quality carbon fiber.\",\n    \"price\": 200.00,\n    \"additionalCost\": 20.00,\n    \"unitQuantity\": 2,\n    \"compatibleModels\": \"Model1, Model2, Model3\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/extra-update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"extra-update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addVehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"model\": \"Model x\",\n  \"year\": 2021,\n  \"basePrice\": 39000.00,\n  \"manufacturer\": \"Audi RS5\",\n  \"standardFeatures\": \"Air Conditioning, Alloy Wheels, GPS Navigation\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/vehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateVehicle",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"model\": \"Model X\",\n  \"year\": 2021,\n  \"basePrice\": 35000.00,\n  \"manufacturer\": \"Audi RS5\",\n  \"standardFeatures\": \"Air Conditioning, Alloy Wheels, GPS Navigation\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/vehicle-update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"vehicle-update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createVehicleOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\": 1,\n  \"vehicleId\": 1,\n  \"extraIds\": [1, 2, 3]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bmw/elite-drive/v1/vehicle-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bmw",
+						"elite-drive",
+						"v1",
+						"vehicle-order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

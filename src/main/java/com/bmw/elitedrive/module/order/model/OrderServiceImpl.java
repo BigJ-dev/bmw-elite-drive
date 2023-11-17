@@ -83,11 +83,13 @@ public class OrderServiceImpl implements OrderService {
     private BigDecimal calculateTotalPrice(VehicleJpa vehicle, List<ExtraJpa> extras) {
         BigDecimal totalPrice = vehicle.getBasePrice();
         BigDecimal extrasTotalPrice = extras.stream()
-                .map(extra -> extra.getPrice().add(extra.getAdditionalCost()).multiply(BigDecimal.valueOf(extra.getUnitQuantity())))
+                .map(extra -> extra.getPrice().multiply(BigDecimal.valueOf(extra.getUnitQuantity()))
+                        .add(extra.getAdditionalCost()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return totalPrice.add(extrasTotalPrice);
     }
+
 
     private List<GetExtraResponse> getExtras(Long orderId) {
         List<Long> extrasIds = orderExtrasRepo.findByOrderId(orderId).stream()
