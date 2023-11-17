@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 
 
         OrderExtras orderExtras = mapToOrderExtras(getExtras(orderJpa.getOrderId()));
-        return mapToVehicleOrderResponse(clientJpa, orderJpa, orderExtras);
+        return mapToVehicleOrderResponse(clientJpa, vehicleJpa, orderJpa, orderExtras);
     }
 
     private ClientJpa getClient(Long clientId) {

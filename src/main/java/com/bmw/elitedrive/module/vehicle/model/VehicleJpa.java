@@ -1,11 +1,9 @@
 package com.bmw.elitedrive.module.vehicle.model;
 
-import com.bmw.elitedrive.module.order.model.OrderJpa;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Data
 @Builder

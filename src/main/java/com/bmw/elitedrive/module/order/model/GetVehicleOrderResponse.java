@@ -13,8 +13,14 @@ public class GetVehicleOrderResponse {
     private Instant orderDate;
     private Instant estimatedDeliveryDate;
     private String status;
+    private String model;
+    private int year;
+    private String manufacturer;
+    private String standardFeatures;
+    private BigDecimal vehicleBasePrice;
     private BigDecimal totalPrice;
     private Long orderId;
     private Long clientId;
+    private Long vehicleId;
     OrderExtras orderExtras;
 }
