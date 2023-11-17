@@ -1,9 +1,11 @@
 package com.bmw.elitedrive.module.client.model;
 
 import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class CreateClientRequest {
     @NotNull
     private String name;
