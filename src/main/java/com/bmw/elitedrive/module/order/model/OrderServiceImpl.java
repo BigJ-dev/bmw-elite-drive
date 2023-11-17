@@ -5,7 +5,10 @@ import com.bmw.elitedrive.common.util.TimeMachine;
 import com.bmw.elitedrive.module.client.dao.ClientRepository;
 import com.bmw.elitedrive.module.client.model.ClientJpa;
 import com.bmw.elitedrive.module.extra.dao.ExtraRepository;
+import com.bmw.elitedrive.module.extra.dao.Mapper;
 import com.bmw.elitedrive.module.extra.model.ExtraJpa;
+import com.bmw.elitedrive.module.extra.model.GetExtraResponse;
+import com.bmw.elitedrive.module.order.dao.OrderExtrasRepository;
 import com.bmw.elitedrive.module.order.dao.OrderRepository;
 import com.bmw.elitedrive.module.order.dao.OrderService;
 import com.bmw.elitedrive.module.order.enums.OrderStatus;
@@ -21,6 +24,10 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.bmw.elitedrive.module.order.dao.Mapper.mapToOrderExtras;
+import static com.bmw.elitedrive.module.order.dao.Mapper.mapToVehicleOrderResponse;
 
 @Slf4j
 @Service
@@ -30,17 +37,29 @@ public class OrderServiceImpl implements OrderService {
     private final VehicleRepository vehicleRepo;
     private final ExtraRepository extraRepo;
     private final OrderRepository orderRepo;
+    private final OrderExtrasRepository orderExtrasRepo;
 
     @Override
     @Transactional
     public GetVehicleOrderResponse createVehicleOrder(CreateVehicleOrderRequest request) {
-        ClientJpa client = getClient(request.getClientId());
-        VehicleJpa vehicle = getVehicle(request.getVehicleId());
-        List<ExtraJpa> extras = getExtras(request.getExtraIds());
+        ClientJpa clientJpa = getClient(request.getClientId());
+        VehicleJpa vehicleJpa = getVehicle(request.getVehicleId());
+        List<ExtraJpa> extrasJpa = getExtras(request.getExtraIds());
 
-        OrderJpa orderJpa = generateVehicleOrder(client, vehicle, extras, calculateTotalPrice(vehicle, extras));
-        orderRepo.save(orderJpa);
-        return null;
+        OrderJpa orderJpa = generateVehicleOrder(clientJpa, vehicleJpa, extrasJpa, calculateTotalPrice(vehicleJpa, extrasJpa));
+        orderRepo.saveAndFlush(orderJpa);
+
+        List<OrderExtrasJpa> orderExtrasJpas = orderJpa.getExtraJpaList().stream()
+                .map(extra -> OrderExtrasJpa.builder()
+                        .orderId(orderJpa.getOrderId())
+                        .extraId(extra.getExtraId())
+                        .build())
+                .collect(Collectors.toList());
+        orderExtrasRepo.saveAll(orderExtrasJpas);
+
+
+        OrderExtras orderExtras = mapToOrderExtras(getExtras(orderJpa.getOrderId()));
+        return mapToVehicleOrderResponse(clientJpa, orderJpa, orderExtras);
     }
 
     private ClientJpa getClient(Long clientId) {
@@ -68,6 +87,16 @@ public class OrderServiceImpl implements OrderService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return totalPrice.add(extrasTotalPrice);
+    }
+
+    private List<GetExtraResponse> getExtras(Long orderId) {
+        List<Long> extrasIds = orderExtrasRepo.findByOrderId(orderId).stream()
+                .map(OrderExtrasJpa::getExtraId)
+                .collect(Collectors.toList());
+
+        return extraRepo.findAllById(extrasIds).stream()
+                .map(Mapper::mapExtraJpaToResponse)
+                .collect(Collectors.toList());
     }
 
     private OrderJpa generateVehicleOrder(ClientJpa client, VehicleJpa vehicle, List<ExtraJpa> extras, BigDecimal totalPrice) {
